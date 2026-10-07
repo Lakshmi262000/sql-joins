@@ -165,6 +165,41 @@ set Country = 'India';
 
 SELECT * FROM learners;
 
+---------------------------------------sub queries-------------------------------
+
+select * from learners;
+select * from courses;
+
+----Find all courses whose course_fee is greater than the average course fee.
+--Display:course_name,course_fee
+select course_name,course_fee from courses 
+where course_fee > (select avg(course_fee) from courses);
+
+---Find the course(s) whose course_fee is equal to the highest course fee.
+--Display:course_name,course_fee
+select course_name,course_fee from courses
+where course_fee = (select max(course_fee) from courses);
+
+---Find all learners who are enrolled in a course whose fee is greater than 50,000.
+--Display:learner_name,course_id
+select l.learner_name,c.course_id,c.course_fee from learners as l
+join courses as c
+on l.course_id = c.course_id
+where course_fee > 50000;
+
+select learner_name,course_id from learners
+where course_id in (select course_id from courses where course_fee > 50000);
+
+
+----Find all learners who are enrolled in the same course as Aarav.
+--Display:learner_name,course_id
+select learner_name,course_id from learners where 
+course_id in(select course_id from learners where learner_name = 'Aarav');
+
+
+
+
+
 
 
 

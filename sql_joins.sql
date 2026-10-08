@@ -197,6 +197,15 @@ select learner_name,course_id from learners where
 course_id in(select course_id from learners where learner_name = 'Aarav');
 
 
+------------------------------------ corelated subquery --------------------------------------------
+
+---For each learner, find whether their enrolled course fee is greater than the average course fee.
+--Display:learner_name,course_name,course_fee
+select l.learner_name,c.course_name,c.course_fee from learners as l
+join courses as c on l.course_id = c.course_id where c.course_fee > (select avg(c2.course_fee) from 
+courses as c2 where c2.course_id = c.course_id);
+
+-----
 
 
 
